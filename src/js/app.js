@@ -16,6 +16,7 @@ function animate() {
     title.classList.add('animate-in');
   }, 1000);
 
+  
   setTimeout(function () {
     courseFeatureElements[0].classList.add('animate-in');
   }, 3000);
