@@ -72,26 +72,25 @@
 	<button class="btn btn-primary" id="back">Back</button>
 	</center>
 	<script>
-		var x = 0;
+		
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
 	        data.forEach(function(data){
 	          var val=data.val();
-	          	localStorage.setItem("email"+x, val.email);
-	          	localStorage.setItem("score"+x, val.score);
-	          	x++;
+	          	localStorage.setItem("email", val.email);
+	          	localStorage.setItem("score", val.score);
 	        });
 	      }
 	    });
 	    var content = '';
 	    for(var i=0; i < localStorage.length; i++){
 		    var propertyName = localStorage.key(i);
-		    if(propertyName == "email"+i){
+		    if(propertyName == "email"){
 		    	content+='<tr>';
-	          	content+='<td>'+localStorage.getItem("email"+i)+'</td>';
-		    }else if(propertyName == "score"+i){
-		    	content+='<td>'+localStorage.getItem("score"+i)+'</td>';
+	          	content+='<td>'+localStorage.getItem("email")+'</td>';
+		    }else if(propertyName == "score"){
+		    	content+='<td>'+localStorage.getItem("score")+'</td>';
 	         	content+='</tr>';
 		    }
 		}$('#tab').append(content);
