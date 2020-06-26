@@ -91,6 +91,10 @@
 
 	      }
 	    });
+		var obj2 = [{"name":"John", "age":30, "city":"New York"}, {"name":"Jay", "age":40, "city":"Los Angeles"}];
+		var myJs = JSON.stringify(obj2);
+		localStorage.newObject = myJs;
+
 		window.onload = function() {
 		    var newObj = JSON.parse(localStorage.allUsers);
 	    var content = '';
