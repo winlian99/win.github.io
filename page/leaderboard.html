@@ -4,6 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Leaderboard</title>
+	<link rel="manifest" href="/../manifest.json">
 </head>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -71,20 +72,29 @@
 	<button class="btn btn-primary" id="back">Back</button>
 	</center>
 	<script>
+		var x = 0;
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
-	        var content = '';
 	        data.forEach(function(data){
 	          var val=data.val();
-	          content+='<tr>';
-	          content+='<td>'+val.email+'</td>';
-	          content+='<td>'+val.score+'</td>';
-	          content+='</tr>';
+	          	localStorage.setItem("email"+x, val.email);
+	          	localStorage.setItem("score"+x, val.score);
+	          	x++;
 	        });
-	        $('#tab').append(content);
 	      }
 	    });
+	    var content = '';
+	    for(var i=0; i < localStorage.length; i++){
+		    var propertyName = localStorage.key(i);
+		    if(propertyName == "email"+i){
+		    	content+='<tr>';
+	          	content+='<td>'+localStorage.getItem("email"+i)+'</td>';
+		    }else if(propertyName == "score"+i){
+		    	content+='<td>'+localStorage.getItem("score"+i)+'</td>';
+	         	content+='</tr>';
+		    }
+		}$('#tab').append(content);
 	</script>
 </body>
 </html>
