@@ -73,15 +73,13 @@
 	</center>
 	<script>
 		alert("masuk new obj");
-		var item = {
-			users : []
-		};
+		var users = [];
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
 	        data.forEach(function(data){
 	          var val=data.val();
-	          this.item.users.push({
+	          users.push({
 		  	"emails" : val.email,
 			  "scores" : val.score
 		  });
@@ -95,7 +93,7 @@
 		var myJs = JSON.stringify(obj2);
 		localStorage.newObject = myJs;
 
-		window.onload = function() {
+		
 		    var newObj = JSON.parse(localStorage.allUsers);
 	    var content = '';
 		for (var i=0; i<newObj.length; i++) {
@@ -114,7 +112,7 @@
 		  }
 		}
 		$('#tab').append(content);
-		}
+		
 		
 	</script>
 </body>
