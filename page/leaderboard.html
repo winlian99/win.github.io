@@ -98,10 +98,12 @@
 		  var b=newObj[i];
 		  for (var k in b) {
 		    if(k == "emails"){
+			 console.log(b[k]);
 			content+='<tr>';
 	          	content+='<td>'+b[k]+'</td>';
 		    }
 		    else if(k == "scores"){
+			 console.log(b[k]);
 			content+='<td>'+b[k]+'</td>';
 	          	content+='</tr>';
 		    }
