@@ -72,28 +72,41 @@
 	<button class="btn btn-primary" id="back">Back</button>
 	</center>
 	<script>
-		
+		var item = {
+			users : []
+		};
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
 	        data.forEach(function(data){
 	          var val=data.val();
-	          	localStorage.setItem("email", val.email);
-	          	localStorage.setItem("score", val.score);
+	          this.item.users.push({
+		  	"emails" : val.email,
+			  "scores" : val.score
+		  });
 	        });
+		var myJ2 = JSON.stringify(item);
+		localStorage.allUsers = myJ2;
+
 	      }
 	    });
+		
+		var newObj = JSON.parse(localStorage.allUsers);
 	    var content = '';
-	    for(var i=0; i < localStorage.length; i++){
-		    var propertyName = localStorage.key(i);
-		    if(propertyName == "email"){
-		    	content+='<tr>';
-	          	content+='<td>'+localStorage.getItem("email")+'</td>';
-		    }else if(propertyName == "score"){
-		    	content+='<td>'+localStorage.getItem("score")+'</td>';
-	         	content+='</tr>';
+		for (var i=0; i<newObj.length; i++) {
+		  var b=newObj[i];
+		  for (var k in b) {
+		    if(k == "emails"){
+			content+='<tr>';
+	          	content+='<td>'+b[k]+'</td>';
 		    }
-		}$('#tab').append(content);
+		    else if(k == "scores"){
+			content+='<td>'+b[k]+'</td>';
+	          	content+='</tr>';
+		    }
+		  }
+		}
+		$('#tab').append(content);
 	</script>
 </body>
 </html>
