@@ -75,17 +75,26 @@
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
-	        var content = '';
 	        data.forEach(function(data){
 	          var val=data.val();
-	          content+='<tr>';
-	          content+='<td>'+val.email+'</td>';
-	          content+='<td>'+val.score+'</td>';
-	          content+='</tr>';
+	          	localStorage.setItem("email", val.email);
+	          	localStorage.setItem("score", val.score);
 	        });
-	        $('#tab').append(content);
 	      }
 	    });
+	    var content = '';
+	    for(var i=0; i < sessionStorage.length; i++){
+		    var propertyName = sessionStorage.key(i);
+		    if(propertyName == "email"){
+		    	content+='<tr>';
+	          	content+='<td>'+localStorage.getItem("email")+'</td>';
+		    }else if(propertyName == "score"){
+		    	content+='<td>'+localStorage.getItem("score")+'</td>';
+	         	content+='</tr>';
+		    }
+		    console.log(  i + " : " + propertyName + " = " +localStorage.getItem(propertyName));
+		}
+		$('#tab').append(content);
 	</script>
 </body>
 </html>
