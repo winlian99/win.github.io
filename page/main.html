@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+	<!-- begitu juga untuk auth-->
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+  	
+	<script>
+  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyBF7U58Q_1T0ZeSsoK8mAS3A32ulNXQ600",
+	    authDomain: "uas-project-a1325.firebaseapp.com",
+	    databaseURL: "https://uas-project-a1325.firebaseio.com",
+	    projectId: "uas-project-a1325",
+	    storageBucket: "uas-project-a1325.appspot.com",
+	    messagingSenderId: "120290898498",
+	    appId: "1:120290898498:web:033a8c09390268999773db",
+	    measurementId: "G-7Q0T26PPRS"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	  firebase.auth.Auth.Persistence.LOCAL;
+	</script>
+
+	<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		  	var curUser = firebase.auth().currentUser;
+		  	document.getElementById('email').innerHTML = curUser.email;
+		    //document.getElementById('logout').style.display = "initial";
+		  } else {
+		  	alert("else: "+user);
+		  	window.location.href="../index.html";
+		    //document.getElementById('logout').style.display = "none";
+		  }
+		});
+		$(document).ready(function(){
+			$('body').delegate('#logout','click',function(){
+				firebase.auth().signOut().then(function() {
+				  // Sign-out successful.
+				  alert("signout!");
+				  window.location.href ="../index.html";
+				}).catch(function(error) {
+				  // An error happened.
+				  alert("failed signout");
+				});
+			});
+			$('body').delegate('#play','click',function(){
+				window.location.href = "play.html";
+			});
+			$('body').delegate('#leaderboard','click',function(){
+				window.location.href = "leaderboard.html";
+			});
+		});
+	</script>
+	<style>
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+		#main{
+			background-image: url('img/wallpaper4.jpg');
+			height: 100%; 
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		#cont{
+			position:fixed;
+		    top: 50%;
+		    left: 50%;
+		    width:30em;
+		    height:18em;
+		    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+		    margin-left: -15em;
+		}
+		#bg{
+			position:fixed;
+		    top: 50%;
+		    left: 50%;
+		    width:30em;
+		    height:18em;
+		    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+		    margin-left: -15em;
+		   	opacity: 0.6;
+		   	border-radius: 25%;
+		    background-color: #a9b8c6;
+		}
+	</style>
+<body id="main">
+	<div id="bg"></div>
+		<div id="cont">
+		<center>
+		<div><p id="email"></p></div>
+		<div><button class="btn btn-primary" id="play">Play</button></div><br>
+		<div><button class="btn btn-secondary" id="leaderboard">Leaderboard</button></div><br>
+		<div><button class="btn btn-danger" id="logout">Logout</button></div><br>
+		</center>
+	</div>
+</body>
+</html>

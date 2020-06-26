@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>Leaderboard</title>
+	<link rel="manifest" href="/../manifest.json">
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+	<!-- begitu juga untuk auth-->
+	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  	<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+  	
+	<script>
+  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyBF7U58Q_1T0ZeSsoK8mAS3A32ulNXQ600",
+	    authDomain: "uas-project-a1325.firebaseapp.com",
+	    databaseURL: "https://uas-project-a1325.firebaseio.com",
+	    projectId: "uas-project-a1325",
+	    storageBucket: "uas-project-a1325.appspot.com",
+	    messagingSenderId: "120290898498",
+	    appId: "1:120290898498:web:033a8c09390268999773db",
+	    measurementId: "G-7Q0T26PPRS"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	  firebase.auth.Auth.Persistence.LOCAL;
+	</script>
+	<script>
+		
+	    $(document).ready(function(){
+	    	$('body').delegate('#back','click',function(){
+				window.location.href = "main.html";
+			});
+	    });
+	</script>
+	<style>
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+		#main{
+			background-image: url('img/wallpaper4.jpg');
+			height: 100%; 
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+	</style>
+<body id="main">
+	<center><h2>Leaderboard</h2></center>
+	<center>
+		<table id="tab">
+			<tr>
+				<th>User</th>
+				<th>Score</th>
+			</tr>
+		</table>
+	
+	<button class="btn btn-primary" id="back">Back</button>
+	</center>
+	<script>
+		var database = firebase.database();
+	    database.ref('/users').once('value',function(data){
+	      if(data.exists()){
+	        var content = '';
+	        data.forEach(function(data){
+	          var val=data.val();
+	          content+='<tr>';
+	          content+='<td>'+val.email+'</td>';
+	          content+='<td>'+val.score+'</td>';
+	          content+='</tr>';
+	        });
+	        $('#tab').append(content);
+	      }
+	    });
+	</script>
+</body>
+</html>

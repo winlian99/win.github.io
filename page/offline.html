@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Offline Pages</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<style>
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+		#main{
+			background-image: url('page/img/wallpaper4.jpg');
+			height: 100%; 
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		#cont{
+			position:fixed;
+		    top: 50%;
+		    left: 50%;
+		    width:30em;
+		    height:18em;
+		    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+		    margin-left: -15em;
+		}
+		#bg{
+			position:fixed;
+		    top: 50%;
+		    left: 50%;
+		    width:30em;
+		    height:18em;
+		    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+		    margin-left: -15em;
+		   	opacity: 0.6;
+		   	border-radius: 25%;
+		    background-color: #a9b8c6;
+		}
+	</style>
+<body id="main">
+	<div id="cont">
+		<h1>You are on offline state</h1>
+		<h2>Please go online</h2>
+	</div>
+</body>
+</html>
