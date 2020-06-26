@@ -4,7 +4,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Leaderboard</title>
-	<link rel="manifest" href="/../manifest.json">
 </head>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -75,26 +74,17 @@
 		var database = firebase.database();
 	    database.ref('/users').once('value',function(data){
 	      if(data.exists()){
+	        var content = '';
 	        data.forEach(function(data){
 	          var val=data.val();
-	          	localStorage.setItem("email", val.email);
-	          	localStorage.setItem("score", val.score);
+	          content+='<tr>';
+	          content+='<td>'+val.email+'</td>';
+	          content+='<td>'+val.score+'</td>';
+	          content+='</tr>';
 	        });
+	        $('#tab').append(content);
 	      }
 	    });
-	    var content = '';
-	    for(var i=0; i < sessionStorage.length; i++){
-		    var propertyName = sessionStorage.key(i);
-		    if(propertyName == "email"){
-		    	content+='<tr>';
-	          	content+='<td>'+localStorage.getItem("email")+'</td>';
-		    }else if(propertyName == "score"){
-		    	content+='<td>'+localStorage.getItem("score")+'</td>';
-	         	content+='</tr>';
-		    }
-		    console.log(  i + " : " + propertyName + " = " +localStorage.getItem(propertyName));
-		}
-		$('#tab').append(content);
 	</script>
 </body>
 </html>
